@@ -10,8 +10,8 @@ let stack;
 let current;
 let maze_complete;
 
-const MAZE_SIZE = 64;
-const FRAMES_PER_SECOND = 200;
+const MAZE_SIZE = 32;
+const FRAMES_PER_SECOND = 500;
 
 // Cell sides. If the flag is on, it indicates that direction is open.
 const LEFT   = 1;
@@ -74,6 +74,7 @@ function recursiveBacktracker() {
 
 function draw() {
   drawBackground();
+  drawCurrentCell();
   drawMaze();
 }
 
@@ -81,12 +82,20 @@ function drawBackground() {
   colorRect(0, 0, canvas.width, canvas.height, 'black');
 }
 
+function drawCurrentCell() {
+  colorRect(xBlockSize * current.x, yBlockSize * current.y, xBlockSize, yBlockSize, 'green');
+}
+
 function drawMaze() {
+  ctx.strokeStyle = 'white';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
   for(var y = 0; y < MAZE_SIZE; y++) {
     for(var x = 0; x < MAZE_SIZE; x++) {
       drawCell(x, y);
     }
   }
+  ctx.stroke();
 }
 
 function drawCell(x, y) {
@@ -94,9 +103,6 @@ function drawCell(x, y) {
   var x1 = xBlockSize + x0;
   var y0 = yBlockSize * y;
   var y1 = yBlockSize + y0;
-  if(current.x === x && current.y === y) {
-    colorRect(x0 + 1, y0 + 1, xBlockSize - 2, yBlockSize - 2, 'green');
-  }
   var cell = maze[x][y];
   if((cell & LEFT) === 0) {
     drawLine(x0, y1, x0, y0);
@@ -113,23 +119,19 @@ function drawCell(x, y) {
 }
 
 function drawLine(x0, y0, x1, y1) {
-  ctx.strokeStyle = 'white';
-  ctx.lineWidth = 1;
-  ctx.beginPath();
   ctx.moveTo(x0, y0);
   ctx.lineTo(x1, y1);
-  ctx.stroke();
+}
+
+function colorRect(x, y, width, height, color) {
+  ctx.fillStyle = color;
+  ctx.fillRect(x, y, width, height);
 }
 
 function getRandomIntInclusive(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive
-}
-
-function colorRect(x, y, width, height, color) {
-  ctx.fillStyle = color;
-  ctx.fillRect(x, y, width, height);
 }
 
 function visited (x, y) {
