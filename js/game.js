@@ -10,8 +10,8 @@ let stack;
 let current;
 let maze_complete;
 
-const MAZE_SIZE = 4;
-const FRAMES_PER_SECOND = 4;
+const MAZE_SIZE = 64;
+const FRAMES_PER_SECOND = 200;
 
 // Cell sides. If the flag is on, it indicates that direction is open.
 const LEFT   = 1;
