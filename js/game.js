@@ -54,8 +54,7 @@ function init() {
 
 function gameLoop() {
   draw();
-  if(!mazeComplete())
-  {
+  if(!mazeComplete()) {
     recursiveBacktracker();
   }
 }
@@ -83,7 +82,9 @@ function drawBackground() {
 }
 
 function drawCurrentCell() {
-  colorRect(xBlockSize * current.x, yBlockSize * current.y, xBlockSize, yBlockSize, 'green');
+  if(!maze_complete) {
+    colorRect(xBlockSize * current.x, yBlockSize * current.y, xBlockSize, yBlockSize, 'green');
+  }
 }
 
 function drawMaze() {
