@@ -83,7 +83,7 @@ function drawBackground() {
 
 function drawCurrentCell() {
   if(!maze_complete) {
-    colorRect(xBlockSize * current.x, yBlockSize * current.y, xBlockSize, yBlockSize, 'green');
+    colorRect(xBlockSize * current.x, yBlockSize * current.y, xBlockSize, yBlockSize, 'lightgreen');
   }
 }
 
