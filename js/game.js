@@ -56,15 +56,19 @@ function gameLoop() {
   draw();
   if(!mazeComplete())
   {
-    if(hasUnvisitedNeighboors(current.x, current.y)) {
-      let next = randomNeighbor(current.x, current.y);
-      stack.push(current);
-      removeWall(current, next);
-      current = next;
-      visited(current.x, current.y);
-    } else if(stack.length > 0) {
-      current = stack.pop();
-    }
+    recursiveBacktracker();
+  }
+}
+
+function recursiveBacktracker() {
+  if(hasUnvisitedNeighboors(current.x, current.y)) {
+    let next = randomNeighbor(current.x, current.y);
+    stack.push(current);
+    removeWall(current, next);
+    current = next;
+    visited(current.x, current.y);
+  } else if(stack.length > 0) {
+    current = stack.pop();
   }
 }
 
