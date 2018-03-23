@@ -7,7 +7,13 @@ let yBlockSize;
 let maze;
 
 const MAZE_SIZE = 10;
-const FRAMES_PER_SECOND = 10;
+const FRAMES_PER_SECOND = 4;
+
+// Cell sides. If the flag is on, it indicates that direction is open.
+const LEFT   = 1;
+const TOP    = 2;
+const RIGHT  = 4;
+const BOTTOM = 8;
 
 window.onload = function() {
   canvas = document.getElementById('game');
@@ -27,6 +33,11 @@ function init() {
     }
     maze.push(row);
   }
+  maze[0][0] = RIGHT;
+  maze[1][0] = LEFT;
+
+  maze[9][0] = BOTTOM;
+  maze[9][1] = TOP;
   xBlockSize = canvas.width / MAZE_SIZE;
   yBlockSize = canvas.height / MAZE_SIZE;
 }
@@ -57,12 +68,17 @@ function drawCell(x, y) {
   var x1 = xBlockSize + x0;
   var y0 = yBlockSize * y;
   var y1 = yBlockSize + y0;
-  drawLine(x0, y1, x0, y0);
-  drawLine(x0, y0, x1, y0);
-  if(x + 1 == MAZE_SIZE) {
+  var cell = maze[x][y];
+  if((cell & LEFT) === 0) {
+    drawLine(x0, y1, x0, y0);
+  }
+  if((cell & TOP) === 0) {
+    drawLine(x0, y0, x1, y0);
+  }
+  if((x + 1 == MAZE_SIZE) || ((cell & RIGHT) === 0)) {
     drawLine(x1, y0, x1, y1);
   }
-  if(y + 1 == MAZE_SIZE) {
+  if((y + 1 == MAZE_SIZE) || ((cell & BOTTOM) === 0)) {
     drawLine(x1, y1, x0, y1);
   }
 }
