@@ -35,8 +35,8 @@ function init() {
   maze = [];
   maze_visited = [];
   for(var y = 0; y < MAZE_SIZE; y++) {
-    row = [];
-    visited_row = [];
+    let row = [];
+    let visited_row = [];
     for(var x = 0; x < MAZE_SIZE; x++) {
       row.push(0);
       visited_row.push(false);
