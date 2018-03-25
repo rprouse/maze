@@ -1,26 +1,36 @@
-let canvas;
-let ctx;
+class Cell {
+  x: number;
+  y: number;
 
-let xBlockSize;
-let yBlockSize;
+  constructor(x: number, y: number) {
+    this.x = x;
+    this.y = y;
+  }
+}
 
-let maze;
-let maze_visited; // have cells been visited or not
-let stack;
+let canvas: HTMLCanvasElement;
+let ctx: CanvasRenderingContext2D;
+
+let xBlockSize: number;
+let yBlockSize: number;
+
+let maze: Array<Array<number>>;
+let maze_visited: Array<Array<boolean>>; // have cells been visited or not
+let stack: Array<Cell>;
 let current;
-let maze_complete;
+let maze_complete: boolean;
 
-const MAZE_SIZE = 64;
-const FRAMES_PER_SECOND = 500;
+const MAZE_SIZE: number = 64;
+const FRAMES_PER_SECOND: number = 500;
 
 // Cell sides. If the flag is on, it indicates that direction is open.
-const LEFT   = 1;
-const TOP    = 2;
-const RIGHT  = 4;
-const BOTTOM = 8;
+const LEFT: number   = 1;
+const TOP: number    = 2;
+const RIGHT: number  = 4;
+const BOTTOM: number = 8;
 
 window.onload = function() {
-  canvas = document.getElementById('game');
+  canvas = <HTMLCanvasElement> document.getElementById('game');
   ctx = canvas.getContext('2d');
 
   init();
