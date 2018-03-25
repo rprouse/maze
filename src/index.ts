@@ -10,7 +10,7 @@ let stack;
 let current;
 let maze_complete;
 
-const MAZE_SIZE = 32;
+const MAZE_SIZE = 64;
 const FRAMES_PER_SECOND = 500;
 
 // Cell sides. If the flag is on, it indicates that direction is open.
@@ -73,12 +73,25 @@ function recursiveBacktracker() {
 
 function draw() {
   drawBackground();
+  drawBorder();
   drawCurrentCell();
   drawMaze();
 }
 
 function drawBackground() {
   colorRect(0, 0, canvas.width, canvas.height, 'black');
+}
+
+function drawBorder() {
+  ctx.strokeStyle = 'white';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(0, 0);
+  ctx.lineTo(canvas.width, 0);
+  ctx.lineTo(canvas.width, canvas.height);
+  ctx.lineTo(0, canvas.height);
+  ctx.lineTo(0, 0);
+  ctx.stroke();
 }
 
 function drawCurrentCell() {
@@ -105,12 +118,12 @@ function drawCell(x, y) {
   var y0 = yBlockSize * y;
   var y1 = yBlockSize + y0;
   var cell = maze[x][y];
-  if((cell & LEFT) === 0) {
-    drawLine(x0, y1, x0, y0);
-  }
-  if((cell & TOP) === 0) {
-    drawLine(x0, y0, x1, y0);
-  }
+  // if((cell & LEFT) === 0) {
+  //   drawLine(x0, y1, x0, y0);
+  // }
+  // if((cell & TOP) === 0) {
+  //   drawLine(x0, y0, x1, y0);
+  // }
   if((x + 1 == MAZE_SIZE) || ((cell & RIGHT) === 0)) {
     drawLine(x1, y0, x1, y1);
   }
