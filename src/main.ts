@@ -1,8 +1,15 @@
 import { Game } from './game';
 
 function init() {
+
   let game = new Game();
-  document.getElementById('reset').onclick = () => game.init();
+  game.init(getMazeSize());
+  document.getElementById('reset').onclick = () => game.init(getMazeSize());
+}
+
+function getMazeSize(): number {
+  let select = <HTMLSelectElement> document.getElementById('size');
+  return parseInt(select.options[select.selectedIndex].value);
 }
 
 if(document.readyState === "complete") {

@@ -8,19 +8,17 @@ export class Game {
   maze: Maze;
   algorithm: RecursiveBacktracker;
 
-  readonly MAZE_SIZE: number = 32;
   readonly FRAMES_PER_SECOND: number = 100;
 
   constructor() {
     console.log('Constructing Game');
     this.canvas = new Canvas('game');
-    this.init();
     setInterval(this.gameLoop.bind(this), 1000/this.FRAMES_PER_SECOND);
   }
 
-  init() {
-    this.canvas.init(this.MAZE_SIZE);
-    this.maze = new Maze(this.MAZE_SIZE, this.MAZE_SIZE);
+  init(size: number) {
+    this.canvas.init(size);
+    this.maze = new Maze(size, size);
     this.algorithm = new RecursiveBacktracker(this.maze);
   }
 
