@@ -3,7 +3,8 @@
     "module": "amd",
     "outDir": "./js",
     "allowJs": true,
-    "target": "es5"
+    "target": "es6",
+    "lib": ["es5", "es6", "dom"]
   },
   "include": [
     "./src/**/*"

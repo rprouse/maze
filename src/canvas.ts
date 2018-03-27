@@ -1,4 +1,5 @@
 import { Cell } from './cell';
+import { Maze } from './maze';
 
 export class Canvas {
   canvas: HTMLCanvasElement;
@@ -38,31 +39,27 @@ export class Canvas {
     }
   }
 
-  drawMaze(maze: Array<Array<number>>) {
+  drawMaze(maze: Maze) {
     this.ctx.strokeStyle = 'white';
     this.ctx.lineWidth = 1;
     this.ctx.beginPath();
-    for(let y = 0; y < maze.length; y++) {
-      for(let x = 0; x < maze[y].length; x++) {
-        this.drawCell(x, y, maze);
-      }
-    }
+    maze.eachCell(c => this.drawCell(c, maze));
     this.ctx.stroke();
   }
 
-  drawCell(x: number, y: number, maze: Array<Array<number>>) {
-    // TODO: Refactor into the Maze
-    const RIGHT = 4;
-    const BOTTOM = 8;
-    let x0 = this.xBlockSize * x;
+  drawCell(cell: Cell, maze: Maze) {
+    let x0 = this.xBlockSize * cell.x;
     let x1 = this.xBlockSize + x0;
-    let y0 = this.yBlockSize * y;
+    let y0 = this.yBlockSize * cell.y;
     let y1 = this.yBlockSize + y0;
-    let cell = maze[x][y];
-    if((x + 1 == maze[y].length) || ((cell & RIGHT) === 0)) {
+    // East Wall
+    let east = maze.get(cell.x+1, cell.y);
+    if(!cell.linked(east)) {
       this.drawLine(x1, y0, x1, y1);
     }
-    if((y + 1 == maze.length) || ((cell & BOTTOM) === 0)) {
+    // South Wall
+    let south = maze.get(cell.x, cell.y+1)
+    if(!cell.linked(south)) {
       this.drawLine(x1, y1, x0, y1);
     }
   }
