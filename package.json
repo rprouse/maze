@@ -1,0 +1,28 @@
+{
+  "name": "maze",
+  "version": "1.0.0",
+  "description": "Experimenting with maze generation algorithms",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rprouse/maze.git"
+  },
+  "keywords": [
+    "typescript",
+    "maze",
+    "algorithms"
+  ],
+  "author": "Rob Prouse <rob@prouse.org>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rprouse/maze/issues"
+  },
+  "homepage": "https://github.com/rprouse/maze#readme",
+  "dependencies": {
+    "requirejs": "^2.3.5",
+    "requirejs-domready": "^2.0.3"
+  }
+}
