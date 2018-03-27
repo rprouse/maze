@@ -2,6 +2,10 @@ import { Cell } from './cell';
 import { Maze } from './maze';
 
 export class Canvas {
+  readonly background: string = '#1E2324';
+  readonly foreground: string = '#F1F2F3';
+  readonly cursor: string = '#93C763';
+
   canvas: HTMLCanvasElement;
   ctx: CanvasRenderingContext2D;
   xBlockSize: number;
@@ -18,11 +22,11 @@ export class Canvas {
   }
 
   drawBackground() {
-    this.colorRect(0, 0, this.canvas.width, this.canvas.height, 'black');
+    this.colorRect(0, 0, this.canvas.width, this.canvas.height, this.background);
   }
 
   drawBorder() {
-    this.ctx.strokeStyle = 'white';
+    this.ctx.strokeStyle = this.foreground;
     this.ctx.lineWidth = 1;
     this.ctx.beginPath();
     this.ctx.moveTo(0, 0);
@@ -35,12 +39,12 @@ export class Canvas {
 
   drawCurrentCell(current: Cell, complete: boolean) {
     if(!complete) {
-      this.colorRect(this.xBlockSize * current.x, this.yBlockSize * current.y, this.xBlockSize, this.yBlockSize, 'lightgreen');
+      this.colorRect(this.xBlockSize * current.x, this.yBlockSize * current.y, this.xBlockSize, this.yBlockSize, this.cursor);
     }
   }
 
   drawMaze(maze: Maze) {
-    this.ctx.strokeStyle = 'white';
+    this.ctx.strokeStyle = this.foreground;
     this.ctx.lineWidth = 1;
     this.ctx.beginPath();
     maze.eachCell(c => this.drawCell(c, maze));

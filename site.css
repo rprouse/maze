@@ -1,6 +1,6 @@
 body {
-  background: black;
-  color: white;
+  background: #22282A;
+  color: #F1F2F3;
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -10,5 +10,9 @@ div#container {
 }
 
 canvas#game {
-  border: 5px solid white;
+  border: 5px solid #F1F2F3;
+}
+
+div#controls {
+  margin-top: 5px;
 }
